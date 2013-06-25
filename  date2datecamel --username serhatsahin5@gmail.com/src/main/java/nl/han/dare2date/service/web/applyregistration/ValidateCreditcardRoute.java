@@ -1,5 +1,6 @@
 package nl.han.dare2date.service.web.applyregistration;
 
+import nl.han.dare2date.service.web.applyregistration.model.ApplyRegistrationRequest;
 import org.apache.camel.builder.RouteBuilder;
 
 /**
@@ -12,5 +13,10 @@ import org.apache.camel.builder.RouteBuilder;
 public class ValidateCreditcardRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
+        from("activemq:queue:RequestQueue").filter((Predicate)(exchange) -> {
+            ApplyRegistrationRequest registrationRequest = exchange.getIn().getBody(ApplyRegistrationRequest)
+
+
+
     }
 }

@@ -30,8 +30,10 @@ public class ApplyRegistrationRoute extends RouteBuilder {
 
         from("spring-ws:rootqname:{http://www.han.nl/schemas/messages}ApplyRegistrationRequest?endpointMapping=#applyRegistrationEndpointMapping")
                 .unmarshal(jaxb)
-                .process(new Echo()).
-                marshal(jaxb);
+                .process(new ProcessCreditCardFromApplyRegistrationRequest())
+                .to("activemq:queue:RequestQueue")
+                .process(new PrepareApplyRegistrationResponse())
+                .marshal(jaxb);
     }
 
     private static final class Echo implements Processor {
