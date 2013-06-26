@@ -36,7 +36,7 @@ public class ApplyRegistrationRoute extends RouteBuilder {
                 .marshal(jaxb);
     }
 
-    private static final class Echo implements Processor {
+    private static final class ProcessCreditCardFromApplyRegistrationRequest implements Processor {
         public void process(Exchange exchange) throws Exception {
             ApplyRegistrationResponse registrationResponse = new ApplyRegistrationResponse();
             registrationResponse.setRegistration(exchange.getIn().getBody(ApplyRegistrationRequest.class).getRegistration());
